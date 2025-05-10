@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes</title>
+    <link rel="stylesheet" href="./assets/css/presentes.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Lista de Presentes</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="historia.html">Nossa História</a></li>
+                <li><a href="presentes.html">Lista de Presentes</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="principal">
+        <div class="boas-vindas">
+            <h2>Kaique & Raphaela</h2>
+            <p>29 de novembro de 2025</p>
+        </div>
+
+        <!-- Campo de pesquisa -->
+        <div class="pesquisa">
+            <input type="text" id="search" placeholder="Pesquisar produtos..." oninput="filtrarProdutos()">
+            <button id="filtro-btn" onclick="abrirModalFiltro()">Filtrar</button>
+        </div>
+
+        <!-- Modal de filtro de preço -->
+        <div id="modal-filtro" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar" onclick="fecharModalFiltro()">&times;</span>
+                <div class="filtro-preco">
+                    <label for="min-preco">Preço mínimo: R$ <span id="min-preco-val">0</span></label>
+                    <input type="range" id="min-preco" min="0" max="5000" value="0" oninput="filtrarProdutos()">
+                    
+                    <label for="max-preco">Preço máximo: R$ <span id="max-preco-val">5000</span></label>
+                    <input type="range" id="max-preco" min="0" max="5000" value="5000" oninput="filtrarProdutos()">
+                    <button type="button">Sair</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards de Produtos -->
+        <div class="cards-curiosidades" id="produtos-lista">
+            <!-- Produtos serão adicionados aqui dinamicamente -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Lista de Presentes. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="./assets/js/presentes.js"></script>
+</body>
+</html>

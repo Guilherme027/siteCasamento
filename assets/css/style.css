@@ -100,7 +100,7 @@
   }
   
   .boas-vindas h2 {
-    margin-top: px;
+    margin-top: 30px;
     font-size: 2em;
     font-weight: bold;
   }
@@ -154,55 +154,83 @@
     margin-top: 30px;
   }
   
-  .cards-curiosidades {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-    align-items: center;
-  }
-  
-  .cards-curiosidades .card {
-    background-color: var(--areia);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-    position: relative;
-  }
-  
-  .cards-curiosidades .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .cards-curiosidades .card::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    z-index: -1;
-  }
-  
-  .cards-curiosidades i {
-    font-size: 2em;
-    color: var(--verde);
-    margin-bottom: 15px;
-  }
-  
-  .cards-curiosidades .card h4 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-  }
-  
-  .cards-curiosidades .card p {
-    font-size: 0.95em;
-  }
-  
+ .cards-curiosidades {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.card {
+  background-color: #f8f8d9;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 300px;
+  flex: 1 1 300px;
+  z-index: 1;
+}
+
+.linha-ondulada {
+  width: 60px;
+  height: 60px;
+  background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><path d='M0,30 Q30,0 60,30' stroke='%2351612b' stroke-width='4' fill='transparent'/></svg>") no-repeat center;
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+
+.cards-curiosidades::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 80' xmlns='http://www.w3.org/2000/svg'><path fill='%2351612b' d='M0,40 C360,10 1080,70 1440,40 L1440,80 L0,80 Z'></path></svg>") no-repeat center;
+  background-size: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+
+.cards-curiosidades .card {
+  background-color: var(--areia);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 250px;
+}
+
+.cards-curiosidades .card:hover {
+  transform: translateY(-5px);
+}
+
+.cards-curiosidades i {
+  font-size: 2em;
+  color: var(--verde);
+  margin-bottom: 15px;
+}
+
+.cards-curiosidades .card h4 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.cards-curiosidades .card p {
+  font-size: 0.95em;
+}
+
   footer {
     background-color: var(--verde);
     color: white;
@@ -213,4 +241,5 @@
     width: 100%;
     font-size: 0.9em;
   }
+  
   

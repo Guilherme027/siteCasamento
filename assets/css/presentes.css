@@ -1,0 +1,283 @@
+/* Variáveis de Cores */
+:root {
+    --verde: #51612b;
+    --bege: #f8f8d9;
+    --verde-claro: #eaffb7;
+    --areia: #ece9d6;
+    --cinza-claro: #f2f2f2;
+    --preto-transparente: rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--areia);
+    color: var(--verde);
+    line-height: 1.6;
+}
+
+/* Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bege);
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px var(--preto-transparente);
+}
+
+header .logo {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--verde);
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav .nav-links a {
+    text-decoration: none;
+    color: var(--verde);
+    font-weight: 500;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding-bottom: 5px;
+}
+
+nav .nav-links a:hover {
+    color: var(--verde-claro);
+    border-bottom: 2px solid var(--verde-claro);
+}
+
+/* Menu Hambúrguer */
+.menu-hamburguer {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-hamburguer div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--verde);
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    nav .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: var(--bege);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px var(--preto-transparente);
+    }
+
+    nav .nav-links.active {
+        display: flex;
+    }
+
+    .menu-hamburguer {
+        display: flex;
+    }
+}
+
+/* Estilo do campo de pesquisa */
+.pesquisa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pesquisa input {
+    padding: 10px;
+    border: 2px solid var(--verde);
+    border-radius: 5px;
+    width: 300px;
+    font-size: 1em;
+}
+
+.pesquisa button {
+    background-color: var(--verde);
+    color: white;
+    font-size: 1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pesquisa button:hover {
+    background-color: var(--verde-claro);
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-conteudo {
+    background-color: white;
+    padding: 20px;
+    margin: 100px auto;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.modal .fechar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5em;
+    color: var(--verde);
+    cursor: pointer;
+}
+
+.filtro-preco {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filtro-preco label {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--verde);
+}
+
+.filtro-preco input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--verde-claro);
+    border-radius: 5px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.filtro-preco input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--verde);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+/* Cards de Produtos */
+.cards-curiosidades {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.card {
+    background-color: var(--cinza-claro);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card h4 {
+    font-size: 1.3em;
+    color: var(--verde);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.1em;
+    color: var(--preto-transparente);
+    margin-bottom: 15px;
+}
+
+.card .btn {
+    background-color: var(--verde);
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.card .btn:hover {
+    background-color: var(--verde-claro);
+    transform: translateY(-3px);
+}
+
+footer {
+    background-color: var(--verde);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: fadeIn 1s ease-in-out;
+}
