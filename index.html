@@ -1,95 +1,237 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaique & Raphaela</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script defer src="./assets/js/script.js"></script>
-  <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaique & Raphaela - Nosso Casamento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-
-  <!-- MENU FIXO -->
-  <header class="header">
-    <h1 class="logo">Kaique & Raphaela</h1>
-    <div class="menu-toggle" id="menu-toggle">
-      <i class="fas fa-bars"></i>
-    </div>
-    <nav id="nav">
-      <ul class="nav-links">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="historia.html">Nossa História</a></li>
-        <li><a href="presentes.html">Lista de Presentes</a></li>
-        <li><a href="contato.html">Contato</a></li>
-      </ul>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">K&R</a>
     </nav>
-  </header>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="principal">
+    <!-- Menu Hamburguer -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
 
-    <!-- Boas-Vindas -->
-    <section class="boas-vindas">
-      <h2>Seja bem-vindo(a) ao nosso grande dia!</h2>
-      <p>Estamos felizes em compartilhar esse momento especial com você. Aqui você encontra tudo sobre nosso casamento: nossa história, lista de presentes e muito mais.</p>
-    </section>
+    <nav class="nav-links" id="navLinks">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#invitation">Convite</a></li>
+            <li><a href="#story">Nossa História</a></li>
+            <li><a href="presentes.html">Lista de Presentes</a></li>
+            <li><a href="#rsvp">Confirmação</a></li>
+        </ul>
+    </nav>
 
-    <!-- Carrossel -->
-    <section class="carrossel">
-      <div class="container" id="carousel-container">
-        <img src="./assets/img/Raphaela e Kaique_pre_0176.jpg" class="slide active" alt="Foto 1" />
-        <img src="./assets/img/Raphaela e Kaique_pre_0329.jpg" class="slide" alt="Foto 2" />
-        <img src="./assets/img/Raphaela e Kaique_pre_0324.jpg" class="slide" alt="Foto 3" />
-        <img src="./assets/img/Raphaela e Kaique_pre_0024.jpg" class="slide" alt="Foto 4" />
-        <img src="./assets/img/Raphaela e Kaique_pre_0146.jpg" class="slide" alt="Foto 5" />
-        <img src="./assets/img/Raphaela e Kaique_pre_0044.jpg" class="slide" alt="Foto 6" />
-      </div>
-      <div class="carrossel-controles">
-        <button id="prev"><i class="fas fa-chevron-left"></i></button>
-        <button id="next"><i class="fas fa-chevron-right"></i></button>
-      </div>
-    </section>
-
-    <!-- Informações do Evento -->
-    <section class="info-evento">
-      <h3>Detalhes do Casamento</h3>
-      <ul>
-        <li><strong>Data:</strong> 15 de Dezembro de 2025</li>
-        <li><strong>Local:</strong> Espaço Verde Luz - Vila Velha/ES</li>
-        <li><strong>Horário:</strong> 17h00</li>
-      </ul>
-    </section>
-
-    <!-- Curiosidades -->
-    <section class="curiosidades">
-      <h3>Curiosidades do Casal</h3>
-      <div class="cards-curiosidades">
-        <div class="card">
-          <i class="fas fa-mug-hot"></i>
-          <h4>Nosso primeiro encontro</h4>
-          <p>Nos conhecemos em um café em 2018, e desde então não nos separamos mais.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="names">
+                Kaique <span class="ampersand">&</span> Raphaela
+            </h1>
+            <p class="date">25 de Outubro de 2025</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          <i class="fas fa-heart"></i>
-          <h4>Nosso amor</h4>
-          <p>Passamos por muitos desafios, mas sempre juntos, aprendendo e crescendo.</p>
+        
+        <!-- Carrossel de Imagens -->
+        <div class="hero-carousel swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0024.jpg" alt="Casal feliz">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0008.jpg" alt="Casal rindo">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0044.jpg" alt="Noivado">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0060.jpg" alt="Noivado">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0132.jpg" alt="Noivado">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0146.jpg" alt="Noivado">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0176.jpg" alt="Noivado">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0352.jpg" alt="Noivado">
+                </div>
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0237.jpg" alt="Noivado">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0391.jpg
+                    " alt="Noivado">
+                </div><div class="swiper-slide">
+                    <img src="./assets/img/Raphaela e Kaique_pre_0324.jpg" alt="Noivado">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div class="card">
-          <i class="fas fa-gift"></i>
-          <h4>Nosso pedido de casamento</h4>
-          <p>O pedido aconteceu durante uma viagem para a Serra do Caparaó. Foi mágico!</p>
-        </div>
-      </div>
     </section>
 
-  </main>
+    <!-- Convite Section -->
+    <section class="invitation" id="invitation">
+        <div class="container">
+            <div class="invitation-card">
+                <h2>Com grande alegria convidamos você para nosso casamento</h2>
+                <p class="invitation-text">
+                    Será uma honra ter sua presença neste dia tão especial, onde celebraremos o início da nossa vida a dois. 
+                    Sua companhia tornará este momento ainda mais memorável.
+                </p>
+                <div class="invitation-names">Kaique & Raphaela</div>
+                <div class="invitation-date">12 de Agosto de 2024</div>
+                <div class="invitation-place">
+                    <p>Cerimônia: Igreja Matriz de Santa Teresa - 16h</p>
+                    <p>Recepção: Chácara das Flores - 18h</p>
+                </div>
+                <a href="#rsvp" class="btn">Confirmar Presença</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- RODAPÉ -->
-  <footer>
-    <p>&copy; 2025 Kaique & Raphaela. Todos os direitos reservados.</p>
-  </footer>
+    <!-- Timeline Section -->
+    <section class="timeline" id="story">
+        <div class="container">
+            <h2 class="section-title">Nossa História</h2>
+            <div class="timeline-container">
+                <!-- Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Junho 2018</div>
+                        <h3 class="timeline-title">Nosso Encontro</h3>
+                        <p class="timeline-description">
+                            Nos conhecemos em uma festa de amigos em comum. Kaique estava no grupo de música e Raphaela 
+                            foi convidada por uma amiga. A química foi instantânea e não nos desgrudamos mais.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Dezembro 2019</div>
+                        <h3 class="timeline-title">Primeira Viagem Juntos</h3>
+                        <p class="timeline-description">
+                            Fomos para as montanhas no primeiro inverno juntos. O frio nos aproximou ainda mais e 
+                            descobrimos que amamos aventuras ao ar livre.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Março 2021</div>
+                        <h3 class="timeline-title">Mudamos Juntos</h3>
+                        <p class="timeline-description">
+                            Decidimos morar juntos e transformar um apartamento vazio em nosso lar. Cada móvel, cada 
+                            detalhe foi escolhido com muito amor e carinho.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Julho 2023</div>
+                        <h3 class="timeline-title">O Pedido</h3>
+                        <p class="timeline-description">
+                            Durante um pôr do sol na praia onde tivemos nosso primeiro encontro romântico, Kaique se 
+                            ajoelhou e perguntou o que Raphaela já sabia que iria responder. O "sim" ecoou pelas ondas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- RSVP Section -->
+    <section class="rsvp" id="rsvp">
+        <div class="container">
+            <h2 class="section-title">Confirme sua Presença</h2>
+            <form id="rsvpForm" class="rsvp-form">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Número de Acompanhantes</label>
+                    <select id="guests">
+                        <option value="0">Vou sozinho(a)</option>
+                        <option value="1">1 acompanhante</option>
+                        <option value="2">2 acompanhantes</option>
+                        <option value="3">3 acompanhantes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="attending">Você comparecerá?</label>
+                    <select id="attending">
+                        <option value="yes">Com certeza estarei lá!</option>
+                        <option value="no">Infelizmente não poderei comparecer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem para os noivos (opcional)</label>
+                    <textarea id="message"></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Confirmação</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">Kaique & Raphaela</p>
+            <p class="footer-text">25.10.2025</p>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+            </ul>
+            <p class="copyright">© 2025 Guilherme Souza. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

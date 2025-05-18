@@ -1,61 +1,136 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Presentes</title>
+    <title>Lista de Presentes - Kaique & Raphaela</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/presentes.css">
 </head>
 <body>
-    <header>
-        <div class="logo">Lista de Presentes</div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="historia.html">Nossa História</a></li>
-                <li><a href="presentes.html">Lista de Presentes</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-        </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">K&R</a>
+    </nav>
+
+    <!-- Menu Hamburguer -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#invitation">Convite</a></li>
+            <li><a href="index.html#story">Nossa História</a></li>
+            <li><a href="presentes.html">Lista de Presentes</a></li>
+            <li><a href="index.html#rsvp">Confirmação</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="gift-header">
+        <div class="container">
+            <h1>Nossa Lista de Presentes</h1>
+            <p>Cada presente foi escolhido com carinho e será muito especial para nós. Filtre por categoria ou valor para encontrar o presente perfeito.</p>
+        </div>
     </header>
 
-    <section class="principal">
-        <div class="boas-vindas">
-            <h2>Kaique & Raphaela</h2>
-            <p>29 de novembro de 2025</p>
-        </div>
-
-        <!-- Campo de pesquisa -->
-        <div class="pesquisa">
-            <input type="text" id="search" placeholder="Pesquisar produtos..." oninput="filtrarProdutos()">
-            <button id="filtro-btn" onclick="abrirModalFiltro()">Filtrar</button>
-        </div>
-
-        <!-- Modal de filtro de preço -->
-        <div id="modal-filtro" class="modal">
-            <div class="modal-conteudo">
-                <span class="fechar" onclick="fecharModalFiltro()">&times;</span>
-                <div class="filtro-preco">
-                    <label for="min-preco">Preço mínimo: R$ <span id="min-preco-val">0</span></label>
-                    <input type="range" id="min-preco" min="0" max="5000" value="0" oninput="filtrarProdutos()">
-                    
-                    <label for="max-preco">Preço máximo: R$ <span id="max-preco-val">5000</span></label>
-                    <input type="range" id="max-preco" min="0" max="5000" value="5000" oninput="filtrarProdutos()">
-                    <button type="button">Sair</button>
+    <!-- Filtros -->
+    <section class="filters-section">
+        <div class="filter-card">
+            <h3 class="filter-title">
+                <i class="fas fa-sliders-h"></i>
+                FILTRAR PRESENTES
+            </h3>
+            
+            <div class="filter-group">
+                <h4 class="filter-subtitle">
+                    <i class="fas fa-tags"></i>
+                    CATEGORIAS
+                </h4>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">
+                        <i class="fas fa-star"></i>
+                        Todos
+                    </button>
+                    <button class="category-btn" data-category="cozinha">
+                        <i class="fas fa-utensils"></i>
+                        Cozinha
+                    </button>
+                    <button class="category-btn" data-category="casa">
+                        <i class="fas fa-home"></i>
+                        Casa
+                    </button>
+                    <button class="category-btn" data-category="eletrodomesticos">
+                        <i class="fas fa-plug"></i>
+                        Eletrodomésticos
+                    </button>
+                    <button class="category-btn" data-category="viagem">
+                        <i class="fas fa-plane"></i>
+                        Viagem
+                    </button>
+                    <button class="category-btn" data-category="experiencias">
+                        <i class="fas fa-glass-cheers"></i>
+                        Experiências
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Cards de Produtos -->
-        <div class="cards-curiosidades" id="produtos-lista">
-            <!-- Produtos serão adicionados aqui dinamicamente -->
+            
+            <div class="filter-group">
+                <h4 class="filter-subtitle">
+                    <i class="fas fa-filter"></i>
+                    FAIXA DE PREÇO
+                </h4>
+                <div class="price-filter">
+                    <div class="price-input-group">
+                        <label for="minPrice">Mínimo</label>
+                        <input type="number" id="minPrice" class="price-input" placeholder="R$ 0" min="0">
+                    </div>
+                    <div class="price-input-group">
+                        <label for="maxPrice">Máximo</label>
+                        <input type="number" id="maxPrice" class="price-input" placeholder="R$ 5000" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <button id="resetFilters" class="reset-btn">
+                <i class="fas fa-undo"></i>
+                Limpar Filtros
+            </button>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Lista de Presentes. Todos os direitos reservados.</p>
+    <!-- Lista de Presentes -->
+    <section class="gifts-section">
+        <div class="container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+            </div>
+            <div class="gift-grid" id="giftList"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gift-footer">
+        <div class="container">
+            <p class="footer-text">Kaique & Raphaela</p>
+            <p class="footer-text">25.10.2025</p>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+            </ul>
+            <p class="copyright">© 2025 Nosso Casamento. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
-    <script src="./assets/js/presentes.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+<script src="./assets/js/presentes.js"></script>
 </body>
 </html>
