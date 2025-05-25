@@ -434,6 +434,11 @@
             letter-spacing: 1px;
         }
 
+        .link{
+            font-size: 1.0rem;
+            color: var(--verde-claro);
+        }
+
         /* Botão */
         .btn {
             display: inline-block;

@@ -64,47 +64,55 @@
             });
 
             // Função para renderizar os presentes
-            function renderGifts(gifts) {
-                giftGrid.innerHTML = '';
-                
-                if (!gifts) {
-                    giftGrid.innerHTML = '<p>Nenhum presente encontrado.</p>';
-                    return;
-                }
-                
-                for (const key in gifts) {
-                    if (gifts.hasOwnProperty(key)) {
-                        const gift = gifts[key];
-                        const giftItem = document.createElement('div');
-                        giftItem.className = 'gift-item';
-                        giftItem.dataset.id = key;
-                        giftItem.dataset.category = gift.category;
-                        giftItem.dataset.price = gift.price;
-                        
-                        giftItem.innerHTML = `
-                            <img src="${gift.image}" alt="${gift.title}" class="gift-image">
-                            <div class="gift-info">
-                                <span class="gift-category">${gift.category}</span>
-                                <h3 class="gift-title">${gift.title}</h3>
-                                <p class="gift-description">${gift.description}</p>
-                                <div class="gift-price">R$ ${gift.price.toFixed(2).replace('.', ',')}</div>
-                                <div class="gift-actions">
-                                    ${gift.reserved ? 
-                                        `<div class="reservation-info">
-                                            <span class="gift-status reserved">Reservado por ${gift.reservedBy}</span>
-                                            <button class="btn btn-cancel cancel-btn">Cancelar Reserva</button>
-                                        </div>` : 
-                                        `<button class="btn reserve-btn">Reservar</button>`
-                                    }
-                                </div>
-                            </div>
-                        `;
-                        
-                        giftGrid.appendChild(giftItem);
-                    }
-                }
-            }
-
+      function renderGifts(gifts) {
+    giftGrid.innerHTML = '';
+    
+    if (!gifts) {
+        giftGrid.innerHTML = '<p>Nenhum presente encontrado.</p>';
+        return;
+    }
+    
+    for (const key in gifts) {
+        if (gifts.hasOwnProperty(key)) {
+            const gift = gifts[key];
+            const giftItem = document.createElement('div');
+            giftItem.className = 'gift-item';
+            giftItem.dataset.id = key;
+            giftItem.dataset.category = gift.category;
+            giftItem.dataset.price = gift.price;
+            
+            // Imagem padrão caso não tenha
+            const imageUrl = gift.image || 'https://images.unsplash.com/photo-1583524505974-6facd53f4593?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80';
+            
+            giftItem.innerHTML = `
+                <div class="gift-image-container">
+                    <img src="${imageUrl}" alt="${gift.title}" class="gift-image" onerror="this.src='https://images.unsplash.com/photo-1583524505974-6facd53f4593?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="gift-info">
+                    <span class="gift-category">${gift.category}</span>
+                    <h3 class="gift-title">${gift.title}</h3>
+                    <p class="gift-description">${gift.description}</p>
+                    <div class="gift-price">R$ ${gift.price.toFixed(2).replace('.', ',')}</div>
+                    <div class="gift-actions">
+                        ${gift.link !== '#' ? 
+                            `<a href="${gift.link}" target="_blank" class="btn btn-view">Ver Produto</a>` : 
+                            ''
+                        }
+                        ${gift.reserved ? 
+                            `<div class="reservation-info">
+                                <span class="gift-status reserved">Reservado por ${gift.reservedBy}</span>
+                                <button class="btn btn-cancel cancel-btn">Cancelar Reserva</button>
+                            </div>` : 
+                            `<button class="btn reserve-btn">Reservar</button>`
+                        }
+                    </div>
+                </div>
+            `;
+            
+            giftGrid.appendChild(giftItem);
+        }
+    }
+}
             // Configurar event listeners após renderizar
             function setupEventListeners() {
                 // Filtros
