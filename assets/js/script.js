@@ -102,7 +102,6 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
-  const guests = document.getElementById('guests').value;
   const attending = document.getElementById('attending').value;
   const message = document.getElementById('message').value;
 
@@ -111,7 +110,6 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
 
   // Detalhes da confirmação
   whatsappMessage += `*E-mail:* ${email}\n`;
-  whatsappMessage += `*Número de acompanhantes:* ${guests}\n`;
   whatsappMessage += `*Confirmo presença:* ${attending === 'yes' ? 'Sim' : 'Não'}\n`;
 
   if (message) {
