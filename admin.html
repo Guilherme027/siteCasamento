@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Casamento K&R</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .guest-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .guest-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .guest-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+
+        .guest-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-declined {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .add-guest-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #loginForm {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botões de admin */
+        .admin-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .btn-logout {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-logout:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginContainer">
+        <form id="loginForm">
+            <h2>Área Administrativa</h2>
+            <div class="form-group">
+                <label for="adminEmail">E-mail</label>
+                <input type="email" id="adminEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Senha</label>
+                <input type="password" id="adminPassword" required>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+    </div>
+
+    <div id="adminContainer" style="display: none;">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>Lista de Convidados</h1>
+                <p>Gerencie as confirmações de presença</p>
+                <div class="admin-actions">
+                    <button id="logoutBtn" class="btn btn-admin">
+                        <i class="fas fa-sign-out-alt"></i> Sair da Administração
+                    </button>
+                    <a href="index.html" class="btn btn-admin btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Site do Casamento
+                    </a>
+                </div>
+            </div>
+
+            <div class="guest-actions">
+                <button id="addGuestBtn" class="btn"><i class="fas fa-plus"></i> Adicionar Convidado</button>
+                <button id="exportBtn" class="btn"><i class="fas fa-file-export"></i> Exportar Lista</button>
+            </div>
+
+            <div id="addGuestForm" class="add-guest-form" style="display: none;">
+                <h3>Adicionar Novo Convidado</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newGuestName">Nome Completo</label>
+                        <input type="text" id="newGuestName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newGuestEmail">E-mail</label>
+                        <input type="email" id="newGuestEmail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newGuestStatus">Status</label>
+                        <select id="newGuestStatus">
+                            <option value="pending">Pendente</option>
+                            <option value="confirmed">Confirmado</option>
+                            <option value="declined">Não vai comparecer</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="saveGuestBtn" class="btn">Salvar Convidado</button>
+                <button id="cancelAddBtn" class="btn" style="background: #6c757d;">Cancelar</button>
+            </div>
+
+            <div class="guest-list">
+                <div class="guest-item" style="background: #f8f9fa; font-weight: bold;">
+                    <div style="flex: 3;">Nome</div>
+                    <div style="flex: 2;">E-mail</div>
+                    <div style="flex: 1;">Status</div>
+                    <div style="flex: 1;">Ações</div>
+                </div>
+                <div id="guestListContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/admin.js" type="module"></script>
+</body>
+
+</html>

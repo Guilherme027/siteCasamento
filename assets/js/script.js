@@ -1,22 +1,3 @@
-const swiper = new Swiper('.swiper', {
-  loop: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  effect: 'fade',
-  fadeEffect: {
-    crossFade: true
-  },
-  slidesPerView: 1,
-  centeredSlides: true,
-  spaceBetween: 0,
-  speed: 1000
-});
 // Navbar scroll effect
 window.addEventListener('scroll', function () {
   const navbar = document.querySelector('.navbar');
@@ -96,41 +77,151 @@ function updateCountdown() {
 const countdownTimer = setInterval(updateCountdown, 1000);
 updateCountdown(); // Chama imediatamente para evitar atraso inicial
 
-// Formulário de confirmação via WhatsApp
-document.getElementById('rsvpForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const attending = document.getElementById('attending').value;
-  const message = document.getElementById('message').value;
-
-  // Mensagem padrão
-  let whatsappMessage = `Olá Kaique e Raphaela! Sou *${name}* e estou confirmando minha presença no casamento de vocês.\n\n`;
-
-  // Detalhes da confirmação
-  whatsappMessage += `*E-mail:* ${email}\n`;
-  whatsappMessage += `*Confirmo presença:* ${attending === 'yes' ? 'Sim' : 'Não'}\n`;
-
-  if (message) {
-    whatsappMessage += `\n*Mensagem:* ${message}\n`;
-  }
-
-  // Codificar a mensagem para URL
-  const encodedMessage = encodeURIComponent(whatsappMessage);
-
-  // Número de telefone (substitua pelo número dos noivos)
-  const phoneNumber = "5527992288575"; // Exemplo: 11 99999-9999
-
-  // Criar link do WhatsApp
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-  // Abrir WhatsApp em nova aba
-  window.open(whatsappUrl, '_blank');
-
-  // Limpar formulário
-  this.reset();
-
-  // Feedback para o usuário
-  alert("Obrigado por confirmar! Você será redirecionado para o WhatsApp para completar a confirmação.");
+// Carrossel de imagens
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
+  slidesPerView: 1,
+  centeredSlides: true,
+  spaceBetween: 0,
+  speed: 1000
 });
+
+// RSVP - Busca e confirmação de convidado
+document.getElementById('searchBtn').addEventListener('click', searchGuest);
+document.getElementById('confirmBtn').addEventListener('click', confirmAttendance);
+
+let currentGuestId = null;
+
+async function searchGuest() {
+    const searchName = document.getElementById('searchName').value.trim().toLowerCase();
+    const feedback = document.getElementById('searchFeedback');
+    
+    if (!searchName) {
+        feedback.innerHTML = '<div class="confirmation-error">Por favor, digite seu nome completo</div>';
+        return;
+    }
+    
+    // Mostra o loading bege e texto bege
+    feedback.innerHTML = `
+        <div class="spinner"></div>
+        <p class="searching-text">Buscando seu nome na lista...</p>
+    `;
+    
+    try {
+        const q = firebase.query(
+            firebase.collection(firebase.db, 'guests'),
+            firebase.where('nameLower', '==', searchName)
+        );
+        
+        const querySnapshot = await firebase.getDocs(q);
+        
+        if (querySnapshot.empty) {
+            feedback.innerHTML = '<div class="confirmation-error">Nome não encontrado na lista. Verifique se digitou corretamente.</div>';
+            document.getElementById('guestInfo').style.display = 'none';
+            return;
+        }
+        
+        querySnapshot.forEach((doc) => {
+            currentGuestId = doc.id;
+            const guest = doc.data();
+            
+            document.getElementById('guestName').textContent = guest.name;
+            document.getElementById('confirmEmail').value = guest.email || '';
+            
+            if (guest.status === 'confirmed') {
+                document.getElementById('confirmAttendance').value = 'yes';
+            } else if (guest.status === 'declined') {
+                document.getElementById('confirmAttendance').value = 'no';
+            }
+            
+            document.getElementById('guestInfo').style.display = 'block';
+            feedback.innerHTML = '';
+            
+            document.getElementById('guestInfo').scrollIntoView({ behavior: 'smooth' });
+        });
+    } catch (error) {
+        feedback.innerHTML = '<div class="confirmation-error">Ocorreu um erro ao buscar seu nome. Tente novamente mais tarde.</div>';
+        console.error('Error searching guest:', error);
+    }
+}
+
+async function confirmAttendance() {
+    const email = document.getElementById('confirmEmail').value.trim();
+    const attending = document.getElementById('confirmAttendance').value;
+    const feedback = document.getElementById('searchFeedback');
+    const confirmBtn = document.getElementById('confirmBtn');
+    
+    if (!email) {
+        feedback.innerHTML = '<div class="confirmation-error">Por favor, informe um e-mail para contato</div>';
+        return;
+    }
+    
+    // Mostra loading bege no botão
+    const originalBtnText = confirmBtn.innerHTML;
+    confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="color: var(--bege)"></i> Confirmando...';
+    confirmBtn.disabled = true;
+    
+    const status = attending === 'yes' ? 'confirmed' : 'declined';
+    
+    try {
+        const guestRef = firebase.doc(firebase.db, 'guests', currentGuestId);
+        const guestDoc = await firebase.getDoc(guestRef);
+        
+        if (!guestDoc.exists()) {
+            throw new Error('Convidado não encontrado');
+        }
+        
+        const guestData = guestDoc.data();
+        
+        const updateData = {
+            email: email,
+            status: status,
+            confirmedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            name: guestData.name,
+            nameLower: guestData.nameLower
+        };
+        
+        await firebase.updateDoc(guestRef, updateData);
+        
+        feedback.innerHTML = `
+            <div class="confirmation-success">
+                <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                ${attending === 'yes' 
+                    ? 'Presença confirmada com sucesso! Estamos ansiosos para vê-lo(a) no nosso grande dia!' 
+                    : 'Lamentamos sua ausência, mas agradecemos por avisar!'}
+            </div>
+        `;
+        
+        document.getElementById('guestInfo').style.display = 'none';
+        document.getElementById('searchName').value = '';
+    } catch (error) {
+        console.error('Erro completo:', error);
+        
+        let errorMessage = 'Ocorreu um erro ao confirmar sua presença.';
+        if (error.code === 'permission-denied') {
+            errorMessage = 'Erro de permissão - por favor, contate os noivos.';
+        }
+        
+        feedback.innerHTML = `
+            <div class="confirmation-error">
+                <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                ${errorMessage}
+            </div>
+        `;
+    } finally {
+        confirmBtn.innerHTML = originalBtnText;
+        confirmBtn.disabled = false;
+    }
+}

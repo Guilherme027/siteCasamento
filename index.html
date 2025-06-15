@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaique & Raphaela - Nosso Casamento</title>
+    <title> Raphaela & Kaique - Nosso Casamento</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">K&R</a>
+        <a href="#" class="logo">R&K</a>
     </nav>
 
     <!-- Menu Hamburguer -->
@@ -40,7 +41,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="names">
-                Kaique <span class="ampersand">&</span> Raphaela
+                Raphaela <span class="ampersand">&</span> Kaique
             </h1>
             <p class="date">25 de Outubro de 2025</p>
 
@@ -108,28 +109,49 @@
         </div>
     </section>
 
-    <!-- Convite Section -->
-    <section class="invitation" id="invitation">
-        <div class="container">
-            <div class="invitation-card">
-                <h2>Com grande alegria convidamos você para nosso casamento</h2>
-                <p class="invitation-text">
-                    Será uma honra ter sua presença neste dia tão especial, onde celebraremos o início da nossa vida a
-                    dois.
-                    Sua companhia tornará este momento ainda mais memorável.
-                </p>
-                <div class="invitation-names">Kaique & Raphaela</div>
-                <div class="invitation-date">25 de Outubro de 2025</div>
-                <div class="invitation-place">
-                    <p>Cerimônia: Igreja Maranata - vila velha 1 Rua doutor freitas lima - Nº 40 - Centro de vila velha
-                        Teresa - 16h </p>
-                    <p>Recepção: Casa Beninha - Rua Jorge Majestade, 100 - Nova Itaparica/ ES, Vila Velha </p>
+   <!-- Convite Section -->
+<section class="invitation" id="invitation">
+    <div class="container">
+        <div class="invitation-card">
+            <h2>Com grande alegria convidamos você para nosso casamento</h2>
+            <p class="invitation-text">
+                Será uma honra ter sua presença neste dia tão especial, onde celebraremos o início da nossa vida a
+                dois.
+                Sua companhia tornará este momento ainda mais memorável.
+            </p>
+            <div class="invitation-names">Raphaela & Kaique</div>
+            <div class="invitation-date">25 de Outubro de 2025</div>
+            <div class="invitation-place">
+                <div class="location-item">
+                    <i class="fas fa-church"></i>
+                    <div>
+                        <h3>Cerimônia</h3>
+                        <p>16h - Igreja Maranata</p>
+                        <a href="https://www.google.com/maps?q=Igreja+Maranata+Rua+doutor+freitas+lima+40+Centro+de+vila+velha+Teresa" 
+                           target="_blank" 
+                           class="map-link">
+                            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+                        </a>
+                    </div>
                 </div>
-                <a href="#rsvp" class="btn">Confirmar Presença</a>
+                
+                <div class="location-item">
+                    <i class="fas fa-glass-cheers"></i>
+                    <div>
+                        <h3>Recepção</h3>
+                        <p>Casa Beninha</p>
+                        <a href="https://www.google.com/maps?q=Casa+Beninha+Rua+Jorge+Majestade+100+Nova+Itaparica+Vila+Velha" 
+                           target="_blank" 
+                           class="map-link">
+                            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+                        </a>
+                    </div>
+                </div>
             </div>
+            <a href="#rsvp" class="btn">Confirmar Presença</a>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Timeline Section -->
     <section class="timeline" id="story">
         <div class="container">
@@ -199,38 +221,47 @@
         </div>
     </section>
 
-   <!-- RSVP Section -->
-<section class="rsvp" id="rsvp">
-    <div class="container">
-        <h2 class="section-title-confirm">Confirme sua Presença</h2>
-        <form id="rsvpForm" class="rsvp-form">
-            <div class="form-group">
-                <label for="name">Nome Completo</label>
-                <input type="text" id="name" required>
+    <!-- RSVP Section -->
+    <section class="rsvp" id="rsvp">
+        <div class="container">
+            <h2 class="section-title-confirm">Confirme sua Presença</h2>
+            <div class="search-form">
+                <div class="form-group">
+                    <label for="searchName">Digite seu nome completo</label>
+                    <input type="text" id="searchName" placeholder="Como está no convite" required>
+                </div>
+                <button id="searchBtn" class="btn">Buscar</button>
             </div>
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" required>
+
+            <div id="guestInfo" class="guest-info" style="display: none;">
+                <h3>Confirme seus dados</h3>
+                <div class="success-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Você está na lista!</span>
+                </div>
+                <p id="guestName"></p>
+                <div class="form-group">
+                    <label for="confirmEmail">E-mail para contato</label>
+                    <input type="email" id="confirmEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmAttendance">Você comparecerá?</label>
+                    <select id="confirmAttendance">
+                        <option value="yes">Com certeza estarei lá!</option>
+                        <option value="no">Infelizmente não poderei comparecer</option>
+                    </select>
+                </div>
+                <button id="confirmBtn" class="btn">Confirmar Presença</button>
             </div>
-            <div class="form-group">
-                <label for="attending">Você comparecerá?</label>
-                <select id="attending">
-                    <option value="yes">Com certeza estarei lá!</option>
-                    <option value="no">Infelizmente não poderei comparecer</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="message">Mensagem para os noivos (opcional)</label>
-                <textarea id="message"></textarea>
-            </div>
-            <button type="submit" class="btn">Enviar Confirmação</button>
-        </form>
-    </div>
-</section>
+
+            <div id="searchFeedback" class="feedback-message"></div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="footer-text">Kaique & Raphaela</p>
+            <p class="footer-text">Raphaela & Kaique</p>
             <p class="footer-text">25.10.2025</p>
             <ul class="social-links">
                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -241,10 +272,54 @@
             <p class="copyright">desenvolvido por <a href="https://www.linkedin.com/in/guilherme-dos-santos-souza/"
                     class="link" target="_blank">Guilherme</a></p>
         </div>
+        <a href="admin.html" class="admin-link" title="Área Administrativa">
+            <i class="fas fa-lock"></i>
+        </a>
     </footer>
+    <<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        import {
+        getFirestore,
+        collection,
+        query,
+        where,
+        getDocs,
+        updateDoc,
+        doc,
+        getDoc,
+        serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyAlQY1K2Rz2_va1Wns6YxpjMFKwmDUIRKg",
+        authDomain: "sitecasamento-fc6be.firebaseapp.com",
+        projectId: "sitecasamento-fc6be",
+        storageBucket: "sitecasamento-fc6be.appspot.com",
+        messagingSenderId: "894669874009",
+        appId: "1:894669874009:web:e99eda528e82686ce46248"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.firebase = {
+        db,
+        collection,
+        query,
+        where,
+        getDocs,
+        updateDoc,
+        doc,
+        getDoc,
+        firestore: {
+        FieldValue: {
+        serverTimestamp
+        }
+        }
+        };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        <script src="./assets/js/script.js"></script>
 </body>
 
 </html>

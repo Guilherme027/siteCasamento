@@ -215,39 +215,4 @@
             }
         });
 
-        // Função para inicializar dados (executar apenas uma vez no console)
-        function initializeGifts() {
-            const gifts = {
-                "gift1": {
-                    "title": "Jogo de Panelas Premium",
-                    "category": "Cozinha",
-                    "description": "Jogo completo de 10 peças em aço inox com revestimento antiaderente.",
-                    "price": 580.00,
-                    "image": "https://images.unsplash.com/photo-1583778176476-4a8b02a64c01",
-                    "reserved": false,
-                    "reservedBy": ""
-                },
-                "gift2": {
-                    "title": "Conjunto de Facas Profissional",
-                    "category": "Cozinha",
-                    "description": "Conjunto com 6 facas de aço inoxidável e suporte de madeira.",
-                    "price": 320.00,
-                    "image": "https://images.unsplash.com/photo-1583778176476-4a8b02a64c01",
-                    "reserved": false,
-                    "reservedBy": ""
-                },
-                "gift3": {
-                    "title": "Máquina de Café Expresso",
-                    "category": "Eletrodomésticos",
-                    "description": "Máquina automática com moedor integrado e preparo de cappuccino.",
-                    "price": 1200.00,
-                    "image": "https://images.unsplash.com/photo-1583778176476-4a8b02a64c01",
-                    "reserved": false,
-                    "reservedBy": ""
-                }
-            };
-
-            giftsRef.set(gifts)
-                .then(() => console.log("Dados inicializados com sucesso!"))
-                .catch(error => console.error("Erro ao inicializar dados:", error));
-        }
+      
