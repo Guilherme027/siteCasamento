@@ -72,6 +72,7 @@
         return;
     }
     
+    
     for (const key in gifts) {
         if (gifts.hasOwnProperty(key)) {
             const gift = gifts[key];
@@ -226,21 +227,26 @@ function reapplyFilters(filters) {
     filterGifts();
 }
 
-            // Função para cancelar reserva
-            function cancelReservation(giftId) {
-                if (confirm("Tem certeza que deseja cancelar a reserva deste presente?")) {
-                    giftsRef.child(giftId).update({
-                        reserved: false,
-                        reservedBy: "",
-                        reservedAt: null
-                    }).then(() => {
-                        alert("Reserva cancelada com sucesso!");
-                    }).catch(error => {
-                        console.error("Erro ao cancelar reserva:", error);
-                        alert("Ocorreu um erro ao cancelar a reserva. Por favor, tente novamente.");
-                    });
-                }
-            }
-        });
+          function cancelReservation(giftId) {
+    // Salva os filtros atuais
+    const activeFilters = {
+        category: document.querySelector('.category-btn.active').dataset.category,
+        minPrice: document.getElementById('minPrice').value,
+        maxPrice: document.getElementById('maxPrice').value
+    };
 
-      
+    if (confirm("Tem certeza que deseja cancelar a reserva deste presente?")) {
+        giftsRef.child(giftId).update({
+            reserved: false,
+            reservedBy: "",
+            reservedAt: null
+        }).then(() => {
+            // Reaplica os filtros após o cancelamento
+            reapplyFilters(activeFilters);
+            alert("Reserva cancelada com sucesso!");
+        }).catch(error => {
+            console.error("Erro ao cancelar reserva:", error);
+            alert("Ocorreu um erro ao cancelar a reserva. Por favor, tente novamente.");
+        });
+    }
+}})
