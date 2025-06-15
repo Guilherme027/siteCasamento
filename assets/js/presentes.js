@@ -181,22 +181,50 @@
             }
 
             // Função para reservar presente
-            function reserveGift(giftId) {
-                const userName = prompt("Por favor, digite seu nome para reservar este presente:");
-                
-                if (userName && userName.trim() !== '') {
-                    giftsRef.child(giftId).update({
-                        reserved: true,
-                        reservedBy: userName.trim(),
-                        reservedAt: firebase.database.ServerValue.TIMESTAMP
-                    }).then(() => {
-                        alert("Presente reservado com sucesso!");
-                    }).catch(error => {
-                        console.error("Erro ao reservar presente:", error);
-                        alert("Ocorreu um erro ao reservar o presente. Por favor, tente novamente.");
-                    });
-                }
-            }
+        // Modifique a função reserveGift para preservar os filtros
+function reserveGift(giftId) {
+    // Salva os filtros atuais antes de fazer a reserva
+    const activeFilters = {
+        category: document.querySelector('.category-btn.active').dataset.category,
+        minPrice: document.getElementById('minPrice').value,
+        maxPrice: document.getElementById('maxPrice').value
+    };
+
+    const userName = prompt("Por favor, digite seu nome para reservar este presente:");
+    
+    if (userName && userName.trim() !== '') {
+        giftsRef.child(giftId).update({
+            reserved: true,
+            reservedBy: userName.trim(),
+            reservedAt: firebase.database.ServerValue.TIMESTAMP
+        }).then(() => {
+            // Reaplica os filtros após a reserva
+            reapplyFilters(activeFilters);
+            alert("Presente reservado com sucesso!");
+        }).catch(error => {
+            console.error("Erro ao reservar presente:", error);
+            alert("Ocorreu um erro ao reservar o presente. Por favor, tente novamente.");
+        });
+    }
+}
+
+// Adicione esta nova função para reaplicar os filtros
+function reapplyFilters(filters) {
+    // Reativa o botão da categoria
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === filters.category) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Restaura os valores de preço
+    document.getElementById('minPrice').value = filters.minPrice;
+    document.getElementById('maxPrice').value = filters.maxPrice;
+    
+    // Reaplica os filtros
+    filterGifts();
+}
 
             // Função para cancelar reserva
             function cancelReservation(giftId) {
