@@ -1205,6 +1205,119 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Melhorias no select */
-select#confirmAttendance {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2351612b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3)}
+
+/* Estilos melhorados para a seleção de convidados */
+.guest-selection {
+    background-color: rgba(250, 245, 240, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(94, 71, 54, 0.1);
+    border: 1px solid var(--bege);
+}
+
+.selection-title {
+    margin-bottom: 15px;
+    color: var(--marrom);
+    font-weight: 500;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.guest-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Scrollbar personalizada */
+.guest-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.guest-options::-webkit-scrollbar-thumb {
+    background-color: var(--bege);
+    border-radius: 4px;
+}
+
+.guest-option {
+    padding: 14px 16px;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--bege-claro);
+    color: var(--marrom);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.guest-option:hover {
+    background-color: var(--bege-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(94, 71, 54, 0.1);
+}
+
+.guest-name {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.guest-email {
+    font-size: 0.85rem;
+    color: var(--marrom-claro);
+    font-style: italic;
+}
+
+/* Estilos para o aviso de confirmação */
+.confirmation-notice {
+    background-color: rgba(250, 245, 240, 0.9);
+    border-left: 4px solid var(--marrom);
+    padding: 12px 15px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirmation-notice i {
+    color: var(--marrom);
+    margin-top: 2px;
+    font-size: 1.2rem;
+}
+
+.confirmation-notice p {
+    margin: 0;
+    color: var(--marrom);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.confirmation-notice strong {
+    color: var(--marrom-escuro);
+}
+
+@media (max-width: 768px) {
+    .confirmation-notice {
+        margin: 15px 0;
+        padding: 10px 12px;
+    }
+}
+
+@keyframes subtlePulse {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
+.confirmation-notice {
+    animation: subtlePulse 3s ease-in-out infinite;
+}
